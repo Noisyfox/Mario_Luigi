@@ -13,4 +13,8 @@ public class World {
 	protected static SparseArray<Environment> mInternalId_environment = new SparseArray<Environment>();
 	protected static SparseArray<Objects> mInternalId_objects = new SparseArray<Objects>();
 	protected static SparseArray<Trigger> mInternalId_trigger = new SparseArray<Trigger>();
+	
+	public void loadFromJSON(String jsonString){
+		
+	}
 }

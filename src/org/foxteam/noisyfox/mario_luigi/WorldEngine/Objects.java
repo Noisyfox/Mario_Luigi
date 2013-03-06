@@ -3,6 +3,8 @@ package org.foxteam.noisyfox.mario_luigi.WorldEngine;
 import android.os.Bundle;
 
 public class Objects {
+	
+	protected int trigger_id = -1;
 
 	public Objects(String id) {
 		if (World.mExternalId_objects.containsKey(id)) {
