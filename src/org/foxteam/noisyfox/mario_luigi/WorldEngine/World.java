@@ -1,22 +1,18 @@
 package org.foxteam.noisyfox.mario_luigi.WorldEngine;
 
-import java.util.HashMap;
-
-import android.util.SparseArray;
-
 public class World {
 
-	protected static HashMap<String, Integer> mExternalId_environment = new HashMap<String, Integer>();
-	protected static HashMap<String, Integer> mExternalId_objects = new HashMap<String, Integer>();
-	protected static HashMap<String, Integer> mExternalId_trigger = new HashMap<String, Integer>();
-	protected static HashMap<String, Integer> mExternalId_sky = new HashMap<String, Integer>();
+	public void loadFromJSON(String jsonString) {
 
-	protected static SparseArray<Environment> mInternalId_environment = new SparseArray<Environment>();
-	protected static SparseArray<Objects> mInternalId_objects = new SparseArray<Objects>();
-	protected static SparseArray<Trigger> mInternalId_trigger = new SparseArray<Trigger>();
-	protected static SparseArray<Sky> mInternalId_sky = new SparseArray<Sky>();
-	
-	public void loadFromJSON(String jsonString){
-		
+	}
+
+	protected enum ScaleMode {
+		adaptive, stretch
+	}
+
+	protected class View {
+		float width = 0f;
+		float height = 0f;
+		ScaleMode scaleMode = ScaleMode.adaptive;
 	}
 }

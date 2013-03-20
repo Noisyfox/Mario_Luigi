@@ -21,14 +21,14 @@ public class Trigger {
 	public int height = 0;
 
 	public Trigger(String id) {
-		if (World.mExternalId_trigger.containsKey(id)) {
+		if (WordEngine.mExternalId_trigger.containsKey(id)) {
 			throw new IllegalArgumentException("WorldEngine:Trigger:Id:\"" + id
 					+ "\" already exist!");
 		}
 
-		int iid = World.mExternalId_trigger.size() + 1;
-		World.mExternalId_trigger.put(id, Integer.valueOf(id));
-		World.mInternalId_trigger.put(iid, this);
+		int iid = WordEngine.mExternalId_trigger.size() + 1;
+		WordEngine.mExternalId_trigger.put(id, Integer.valueOf(id));
+		WordEngine.mInternalId_trigger.put(iid, this);
 	}
 
 }

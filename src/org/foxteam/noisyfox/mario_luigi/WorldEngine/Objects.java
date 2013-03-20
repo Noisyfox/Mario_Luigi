@@ -3,18 +3,18 @@ package org.foxteam.noisyfox.mario_luigi.WorldEngine;
 import android.os.Bundle;
 
 public class Objects {
-	
+
 	protected int trigger_id = -1;
 
 	public Objects(String id) {
-		if (World.mExternalId_objects.containsKey(id)) {
+		if (WordEngine.mExternalId_objects.containsKey(id)) {
 			throw new IllegalArgumentException("WorldEngine:Objects:Id:\"" + id
 					+ "\" already exist!");
 		}
 
-		int iid = World.mExternalId_objects.size() + 1;
-		World.mExternalId_objects.put(id, Integer.valueOf(id));
-		World.mInternalId_objects.put(iid, this);
+		int iid = WordEngine.mExternalId_objects.size() + 1;
+		WordEngine.mExternalId_objects.put(id, Integer.valueOf(id));
+		WordEngine.mInternalId_objects.put(iid, this);
 	}
 
 	/**

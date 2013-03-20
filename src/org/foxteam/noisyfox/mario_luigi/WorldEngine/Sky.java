@@ -16,14 +16,14 @@ public class Sky {
 	List<Tiles> mTiles = new ArrayList<Tiles>();
 
 	public Sky(String id) {
-		if (World.mExternalId_sky.containsKey(id)) {
+		if (WordEngine.mExternalId_sky.containsKey(id)) {
 			throw new IllegalArgumentException("WorldEngine:Objects:Id:\"" + id
 					+ "\" already exist!");
 		}
 
-		int iid = World.mExternalId_sky.size() + 1;
-		World.mExternalId_sky.put(id, Integer.valueOf(id));
-		World.mInternalId_sky.put(iid, this);
+		int iid = WordEngine.mExternalId_sky.size() + 1;
+		WordEngine.mExternalId_sky.put(id, Integer.valueOf(id));
+		WordEngine.mInternalId_sky.put(iid, this);
 	}
 
 	protected void preDraw(Canvas c) {
