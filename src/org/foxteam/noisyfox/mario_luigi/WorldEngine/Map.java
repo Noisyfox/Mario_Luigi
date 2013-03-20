@@ -9,14 +9,14 @@ public class Map {
 	MapData mapData[][];
 
 	public Map(String id) {
-		if (WordEngine.mExternalId_map.containsKey(id)) {
+		if (WorldEngine.mExternalId_map.containsKey(id)) {
 			throw new IllegalArgumentException("WorldEngine:Map:Id:\"" + id
 					+ "\" already exist!");
 		}
 
-		int iid = WordEngine.mExternalId_map.size() + 1;
-		WordEngine.mExternalId_map.put(id, Integer.valueOf(id));
-		WordEngine.mInternalId_map.put(iid, this);
+		int iid = WorldEngine.mExternalId_map.size() + 1;
+		WorldEngine.mExternalId_map.put(id, Integer.valueOf(id));
+		WorldEngine.mInternalId_map.put(iid, this);
 	}
 
 	protected class MapData {

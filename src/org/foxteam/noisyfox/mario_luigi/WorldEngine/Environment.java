@@ -25,14 +25,14 @@ public abstract class Environment {
 	protected int frameCount = 0;
 
 	public Environment(String id) {
-		if (WordEngine.mExternalId_environment.containsKey(id)) {
+		if (WorldEngine.mExternalId_environment.containsKey(id)) {
 			throw new IllegalArgumentException("WorldEngine:Environment:Id:\""
 					+ id + "\" already exist!");
 		}
 
-		int iid = WordEngine.mExternalId_environment.size() + 1;
-		WordEngine.mExternalId_environment.put(id, Integer.valueOf(id));
-		WordEngine.mInternalId_environment.put(iid, this);
+		int iid = WorldEngine.mExternalId_environment.size() + 1;
+		WorldEngine.mExternalId_environment.put(id, Integer.valueOf(id));
+		WorldEngine.mInternalId_environment.put(iid, this);
 	}
 
 	/**
