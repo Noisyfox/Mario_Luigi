@@ -1,5 +1,6 @@
 package org.foxteam.noisyfox.mario_luigi.WorldEngine;
 
+import org.foxteam.noisyfox.FoxGaming.Core.FGDebug;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,14 +28,25 @@ public class World implements WorldEngineElement {
 	}
 	
 	/***********************************************************************************/
-	protected static void loadJSONData(JSONArray worldArray)throws JSONException{
+	protected static void loadJSONData(JSONArray dataArray)throws JSONException{
+		if (dataArray == null || dataArray.length() == 0)
+			return;
 		
+		int len = dataArray.length();
+		for (int i = 0; i < len; i++) {
+			JSONObject js_world_def = dataArray.getJSONObject(i);
+			String world_id = js_world_def.optString("id");
+			if (world_id.isEmpty()) {
+				FGDebug.debug("Load world fail: missing id.");
+				continue;
+			}
+			World world = new World(world_id);
+		}
 	}
 
 	@Override
 	public WorldEngineElement inheritFrom(JSONObject data) throws JSONException {
 		return null;
 	}
-	
 	
 }

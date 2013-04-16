@@ -3,6 +3,11 @@ package org.foxteam.noisyfox.mario_luigi.WorldEngine;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.foxteam.noisyfox.FoxGaming.Core.FGDebug;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
@@ -17,7 +22,7 @@ public class Sky {
 
 	public Sky(String id) {
 		if (WorldEngine.mExternalId_sky.containsKey(id)) {
-			throw new IllegalArgumentException("WorldEngine:Objects:Id:\"" + id
+			throw new IllegalArgumentException("WorldEngine:Sky:Id:\"" + id
 					+ "\" already exist!");
 		}
 
@@ -83,5 +88,49 @@ public class Sky {
 		float mapCoord[] = { 0f, 0f, 0f, 0f };// x0,y0,x1,y1
 		ScaleType scaeType_x = ScaleType.repeat;
 		ScaleType scaeType_y = ScaleType.repeat;
+	}
+
+	/***********************************************************************************/
+	protected static void loadJSONData(JSONArray dataArray)
+			throws JSONException {
+		if (dataArray == null || dataArray.length() == 0)
+			return;
+
+		int len = dataArray.length();
+		for (int i = 0; i < len; i++) {
+			JSONObject js_sky_def = dataArray.getJSONObject(i);
+			String sky_id = js_sky_def.optString("id");
+			if (sky_id.isEmpty()) {
+				FGDebug.debug("Load sky fail: missing id.");
+				continue;
+			}
+			Sky sky = new Sky(sky_id);
+
+			JSONArray js_sky_tiles = js_sky_def.optJSONArray("tiles");
+			if (js_sky_tiles == null)
+				continue;
+
+			int tiles_len = js_sky_tiles.length();
+			if (tiles_len == 0)
+				continue;
+			for (int j = 0; j < tiles_len; j++) {
+				JSONObject js_sky_tile = js_sky_tiles.getJSONObject(j);
+				Tiles tile = sky.new Tiles();
+				tile.mapCoord[0] = (float) js_sky_tile.optDouble("map_x0", 0);
+				tile.mapCoord[1] = (float) js_sky_tile.optDouble("map_y0", 0);
+				tile.mapCoord[2] = (float) js_sky_tile.optDouble("map_x1", 0);
+				tile.mapCoord[3] = (float) js_sky_tile.optDouble("map_y1", 0);
+
+				tile.scaeType_x = js_sky_tile.optString("scale_x", "repeat")
+						.equals("repeat") ? ScaleType.repeat : ScaleType.scale;
+				tile.scaeType_y = js_sky_tile.optString("scale_y", "scale")
+						.equals("repeat") ? ScaleType.repeat : ScaleType.scale;
+				// ¼ÓÔØbitmap
+				String bitmapPath = js_sky_tile.optString("path");
+				tile.bitmap = Resource.optBitmap(bitmapPath);
+
+				sky.mTiles.add(tile);
+			}
+		}
 	}
 }
